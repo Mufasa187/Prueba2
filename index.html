@@ -1,205 +1,38 @@
 <!DOCTYPE html>
-2
 <html>
-3
 <head>
-4
-<meta charset="utf-8">
-5
-<title>Quest 3 - Mover Cubo y Esfera</title>
-6
- 
-7
-<script/aframe.io/releases/1.5.0/aframe.min.jsscript>
-8
- 
-9
-<script>
-10
-AFRAME.registerComponent("follow-controller", {
-11
- 
-12
-init() {
-13
- 
-14
-this.grabbed = false;
-15
-this.controller = null;
-16
- 
-17
-this.el.addEventListener("raycaster-intersected", (e) => {
-18
-this.controller = e.detail.el;
-19
-});
-20
- 
-21
-this.el.addEventListener("raycaster-intersected-cleared", () => {
-22
-this.controller = null;
-23
-});
-24
- 
-25
-this.el.addEventListener("click", () => {
-26
-this.grabbed = !this.grabbed;
-27
-});
-28
-},
-29
- 
-30
-tick() {
-31
- 
-32
-if (!this.grabbed || !this.controller) return;
-33
- 
-34
-let pos = new THREE.Vector3();
-35
- 
-36
-this.controller.object3D.getWorldPosition(pos);
-37
- 
-38
-this.el.object3D.position.copy(pos);
-39
-}
-40
-});
-41
-</script>
-42
- 
-43
+    <meta charset="utf-8">
+    <title>Meta Quest 3 Demo</title>
+
+    <script/aframe.io/releases/1.5.0/aframe.min.jsscript>
 </head>
-44
- 
-45
+
 <body>
-46
- 
-47
-<a-scene webxr="optionalFeatures: hand-tracking">
-48
- 
-49
-<!-- Cámara -->
-50
-<a-entity position="0 1.6 0">
-51
-<a-camera></a-camera>
-52
-</a-entity>
-53
- 
-54
-<!-- Controlador Izquierdo -->
-55
-<a-entity
-56
-laser-controls="hand: left"
-57
-raycaster="objects: .movable">
-58
-</a-entity>
-59
- 
-60
-<!-- Controlador Derecho -->
-61
-<a-entity
-62
-laser-controls="hand: right"
-63
-raycaster="objects: .movable">
-64
-</a-entity>
-65
- 
-66
-<!-- Cubo -->
-67
-<a-box
-68
-class="movable"
-69
-color="red"
-70
-position="-0.5 1.5 -2"
-71
-width="0.4"
-72
-height="0.4"
-73
-depth="0.4"
-74
-follow-controller>
-75
-</a-box>
-76
- 
-77
-<!-- Esfera -->
-78
-<a-sphere
-79
-class="movable"
-80
-color="blue"
-81
-radius="0.25"
-82
-position="0.5 1.5 -2"
-83
-follow-controller>
-84
-</a-sphere>
-85
- 
-86
-<!-- Piso -->
-87
-<a-plane
-88
-rotation="-90 0 0"
-89
-width="20"
-90
-height="20"
-91
-color="#7BC8A4">
-92
-</a-plane>
-93
- 
-94
-<!-- Luz -->
-95
-<a-light
-96
-type="ambient"
-97
-intensity="1">
-98
-</a-light>
-99
- 
-100
+
+<a-scene>
+
+    <a-sky color="#222"></a-sky>
+
+    <a-box
+        position="-1 1.5 -3"
+        color="red">
+    </a-box>
+
+    <a-sphere
+        position="1 1.5 -3"
+        radius="0.5"
+        color="blue">
+    </a-sphere>
+
+    <a-plane
+        position="0 0 -3"
+        rotation="-90 0 0"
+        width="10"
+        height="10"
+        color="green">
+    </a-plane>
+
 </a-scene>
-101
- 
-102
+
 </body>
-103
 </html>
